@@ -253,14 +253,16 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
   };
 
   if (loading) {
-    return <section className="panel">불러오는 중...</section>;
+    return <section className="panel">게시글을 불러오는 중입니다...</section>;
   }
 
   if (errorMessage) {
     return (
       <section className="panel">
         <p className="error-text">{errorMessage}</p>
-        <Link to="/">목록으로</Link>
+        <Link to="/" className="link-text">
+          목록으로 이동
+        </Link>
       </section>
     );
   }
@@ -268,8 +270,10 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
   if (!post) {
     return (
       <section className="panel">
-        <p>게시글을 찾을 수 없습니다.</p>
-        <Link to="/">목록으로</Link>
+        <p className="empty-text">게시글을 찾을 수 없습니다.</p>
+        <Link to="/" className="link-text">
+          목록으로 이동
+        </Link>
       </section>
     );
   }
@@ -278,6 +282,12 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
 
   return (
     <section className="panel">
+      <div className="row-buttons" style={{ marginTop: 0, marginBottom: '14px' }}>
+        <Link to="/" className="btn btn-secondary">
+          목록으로
+        </Link>
+      </div>
+
       {isEditingPost ? (
         <form onSubmit={handlePostUpdate} className="form">
           <label>
@@ -301,15 +311,19 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
           </label>
 
           <div className="row-buttons">
-            <button type="submit">수정 저장</button>
-            <button type="button" onClick={() => setIsEditingPost(false)}>
+            <button type="submit" className="btn btn-primary">
+              수정 저장
+            </button>
+            <button type="button" onClick={() => setIsEditingPost(false)} className="btn btn-secondary">
               취소
             </button>
           </div>
         </form>
       ) : (
         <>
-          <h2>{post.title}</h2>
+          <h1 className="page-title" style={{ fontSize: '2rem' }}>
+            {post.title}
+          </h1>
           <p className="meta-text">
             작성자: {post.profile?.nickname ?? '알 수 없음'} | 작성일:{' '}
             {new Date(post.created_at).toLocaleString()}
@@ -318,10 +332,10 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
 
           {isPostOwner ? (
             <div className="row-buttons">
-              <button type="button" onClick={() => setIsEditingPost(true)}>
+              <button type="button" onClick={() => setIsEditingPost(true)} className="btn btn-secondary">
                 게시글 수정
               </button>
-              <button type="button" onClick={handlePostDelete}>
+              <button type="button" onClick={handlePostDelete} className="btn btn-danger">
                 게시글 삭제
               </button>
             </div>
@@ -329,9 +343,9 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
         </>
       )}
 
-      <hr />
+      <hr className="card-divider" />
 
-      <h3>댓글</h3>
+      <h3 className="comments-title">댓글 {comments.length}개</h3>
       <ul className="list">
         {comments.map((comment) => {
           const isCommentOwner = userId === comment.user_id;
@@ -351,24 +365,28 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
                     onChange={(event) => setEditingCommentContent(event.target.value)}
                   />
                   <div className="row-buttons">
-                    <button type="button" onClick={() => handleCommentUpdate(comment.id)}>
+                    <button
+                      type="button"
+                      onClick={() => handleCommentUpdate(comment.id)}
+                      className="btn btn-primary"
+                    >
                       댓글 수정 저장
                     </button>
-                    <button type="button" onClick={() => setEditingCommentId(null)}>
+                    <button type="button" onClick={() => setEditingCommentId(null)} className="btn btn-secondary">
                       취소
                     </button>
                   </div>
                 </>
               ) : (
-                <p>{comment.content}</p>
+                <p className="comment-content">{comment.content}</p>
               )}
 
               {isCommentOwner && !isEditingThis ? (
                 <div className="row-buttons">
-                  <button type="button" onClick={() => startCommentEdit(comment)}>
+                  <button type="button" onClick={() => startCommentEdit(comment)} className="btn btn-secondary">
                     댓글 수정
                   </button>
-                  <button type="button" onClick={() => handleCommentDelete(comment.id)}>
+                  <button type="button" onClick={() => handleCommentDelete(comment.id)} className="btn btn-danger">
                     댓글 삭제
                   </button>
                 </div>
@@ -389,11 +407,17 @@ export default function PostDetailPage({ userId }: PostDetailPageProps) {
               onChange={(event) => setNewComment(event.target.value)}
             />
           </label>
-          <button type="submit">댓글 등록</button>
+          <button type="submit" className="btn btn-primary">
+            댓글 등록
+          </button>
         </form>
       ) : (
-        <p>
-          댓글 작성은 <Link to="/login">로그인</Link> 후 가능합니다.
+        <p className="meta-text">
+          댓글 작성은{' '}
+          <Link to="/login" className="link-text">
+            로그인
+          </Link>{' '}
+          후 가능합니다.
         </p>
       )}
 

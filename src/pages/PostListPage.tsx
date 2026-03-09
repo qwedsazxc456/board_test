@@ -64,30 +64,46 @@ export default function PostListPage({ userId }: PostListPageProps) {
   }, []);
 
   return (
-    <section className="panel">
-      <div className="panel-header">
-        <h2>게시글 목록</h2>
-        {userId ? <Link to="/posts/new">게시글 작성</Link> : null}
+    <section>
+      <div className="page-title-wrap">
+        <h1 className="page-title">최근 게시글</h1>
+        <p className="page-subtitle">커뮤니티 소식을 확인하고 이야기를 남겨보세요.</p>
       </div>
 
-      {loading ? <p>불러오는 중...</p> : null}
-      {errorMessage ? <p className="error-text">{errorMessage}</p> : null}
-
-      {!loading && posts.length === 0 ? <p>게시글이 없습니다.</p> : null}
-
-      <ul className="list">
-        {posts.map((post) => (
-          <li key={post.id} className="list-item">
-            <Link to={`/posts/${post.id}`}>
-              <h3>{post.title}</h3>
+      <div className="panel">
+        <div className="panel-header">
+          <h2 className="section-title">전체 게시글</h2>
+          {userId ? (
+            <Link to="/posts/new" className="btn btn-primary">
+              새 글 작성
             </Link>
-            <p className="meta-text">
-              작성자: {post.profile?.nickname ?? '알 수 없음'} | 작성일:{' '}
-              {new Date(post.created_at).toLocaleString()}
-            </p>
-          </li>
-        ))}
-      </ul>
+          ) : null}
+        </div>
+
+        {loading ? <p className="empty-text">게시글을 불러오는 중입니다...</p> : null}
+        {errorMessage ? <p className="error-text">{errorMessage}</p> : null}
+
+        {!loading && posts.length === 0 ? <p className="empty-text">아직 게시글이 없습니다.</p> : null}
+
+        <ul className="list">
+          {posts.map((post) => (
+            <li key={post.id} className="list-item post-item">
+              <div className="post-info">
+                <Link to={`/posts/${post.id}`}>
+                  <h3 className="post-title">{post.title}</h3>
+                </Link>
+                <p className="meta-text">
+                  작성자: {post.profile?.nickname ?? '알 수 없음'} | 작성일:{' '}
+                  {new Date(post.created_at).toLocaleString()}
+                </p>
+              </div>
+              <Link to={`/posts/${post.id}`} className="btn btn-secondary">
+                보기
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

@@ -48,7 +48,7 @@ export default function SignUpPage({ userId }: SignUpPageProps) {
       }
     }
 
-    setMessage('회원가입이 완료되었습니다. 이메일 인증 설정이 있다면 인증 후 로그인하세요.');
+    setMessage('회원가입이 완료되었습니다. 이메일 인증이 켜져 있다면 인증 후 로그인해 주세요.');
     setEmail('');
     setPassword('');
     setNickname('');
@@ -56,8 +56,12 @@ export default function SignUpPage({ userId }: SignUpPageProps) {
   };
 
   return (
-    <section className="panel">
-      <h2>회원가입</h2>
+    <section className="panel auth-panel">
+      <div className="page-title-wrap">
+        <h1 className="page-title">새 계정 만들기</h1>
+        <p className="page-subtitle">커뮤니티 참여를 위해 기본 정보를 입력하세요.</p>
+      </div>
+
       <form onSubmit={handleSubmit} className="form">
         <label>
           이메일
@@ -90,16 +94,19 @@ export default function SignUpPage({ userId }: SignUpPageProps) {
           />
         </label>
 
-        <button type="submit" disabled={loading}>
-          {loading ? '처리 중...' : '회원가입'}
+        <button type="submit" disabled={loading} className="btn btn-primary">
+          {loading ? '가입 처리 중...' : '회원가입'}
         </button>
       </form>
 
       {message ? <p className="success-text">{message}</p> : null}
       {errorMessage ? <p className="error-text">{errorMessage}</p> : null}
 
-      <p>
-        이미 계정이 있나요? <Link to="/login">로그인</Link>
+      <p className="meta-text">
+        이미 계정이 있나요?{' '}
+        <Link to="/login" className="link-text">
+          로그인
+        </Link>
       </p>
     </section>
   );

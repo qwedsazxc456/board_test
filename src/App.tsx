@@ -37,32 +37,36 @@ export default function App() {
   }, []);
 
   if (loadingAuth) {
-    return <div className="container">인증 상태 확인 중...</div>;
+    return <div className="container">인증 상태를 확인하고 있습니다...</div>;
   }
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1>
-          <Link to="/">게시판 MVP</Link>
-        </h1>
-        <AuthStatus userEmail={user?.email ?? null} />
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="topbar-inner">
+          <Link to="/" className="brand-link">
+            <span>커뮤니티 게시판</span>
+          </Link>
+          <AuthStatus userEmail={user?.email ?? null} />
+        </div>
       </header>
 
-      <Routes>
-        <Route path="/" element={<PostListPage userId={user?.id ?? null} />} />
-        <Route path="/signup" element={<SignUpPage userId={user?.id ?? null} />} />
-        <Route path="/login" element={<LoginPage userId={user?.id ?? null} />} />
-        <Route
-          path="/posts/new"
-          element={
-            <RequireAuth userId={user?.id ?? null}>
-              <NewPostPage userId={user?.id ?? ''} />
-            </RequireAuth>
-          }
-        />
-        <Route path="/posts/:postId" element={<PostDetailPage userId={user?.id ?? null} />} />
-      </Routes>
+      <main className="container">
+        <Routes>
+          <Route path="/" element={<PostListPage userId={user?.id ?? null} />} />
+          <Route path="/signup" element={<SignUpPage userId={user?.id ?? null} />} />
+          <Route path="/login" element={<LoginPage userId={user?.id ?? null} />} />
+          <Route
+            path="/posts/new"
+            element={
+              <RequireAuth userId={user?.id ?? null}>
+                <NewPostPage userId={user?.id ?? ''} />
+              </RequireAuth>
+            }
+          />
+          <Route path="/posts/:postId" element={<PostDetailPage userId={user?.id ?? null} />} />
+        </Routes>
+      </main>
     </div>
   );
 }

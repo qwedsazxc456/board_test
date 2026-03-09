@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 type NewPostPageProps = {
@@ -39,7 +39,11 @@ export default function NewPostPage({ userId }: NewPostPageProps) {
 
   return (
     <section className="panel">
-      <h2>게시글 작성</h2>
+      <div className="page-title-wrap">
+        <h1 className="page-title">게시글 작성</h1>
+        <p className="page-subtitle">제목과 내용을 입력한 뒤 게시글을 발행하세요.</p>
+      </div>
+
       <form onSubmit={handleSubmit} className="form">
         <label>
           제목
@@ -61,9 +65,14 @@ export default function NewPostPage({ userId }: NewPostPageProps) {
           />
         </label>
 
-        <button type="submit" disabled={loading}>
-          {loading ? '저장 중...' : '작성 완료'}
-        </button>
+        <div className="row-buttons">
+          <button type="submit" disabled={loading} className="btn btn-primary">
+            {loading ? '저장 중...' : '게시글 발행'}
+          </button>
+          <Link to="/" className="btn btn-secondary">
+            취소
+          </Link>
+        </div>
       </form>
 
       {errorMessage ? <p className="error-text">{errorMessage}</p> : null}

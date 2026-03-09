@@ -40,8 +40,12 @@ export default function LoginPage({ userId }: LoginPageProps) {
   };
 
   return (
-    <section className="panel">
-      <h2>로그인</h2>
+    <section className="panel auth-panel">
+      <div className="page-title-wrap">
+        <h1 className="page-title">다시 만나서 반가워요</h1>
+        <p className="page-subtitle">이메일과 비밀번호를 입력해 로그인하세요.</p>
+      </div>
+
       <form onSubmit={handleSubmit} className="form">
         <label>
           이메일
@@ -63,15 +67,18 @@ export default function LoginPage({ userId }: LoginPageProps) {
           />
         </label>
 
-        <button type="submit" disabled={loading}>
-          {loading ? '처리 중...' : '로그인'}
+        <button type="submit" disabled={loading} className="btn btn-primary">
+          {loading ? '로그인 중...' : '로그인'}
         </button>
       </form>
 
       {errorMessage ? <p className="error-text">{errorMessage}</p> : null}
 
-      <p>
-        계정이 없나요? <Link to="/signup">회원가입</Link>
+      <p className="meta-text">
+        계정이 없나요?{' '}
+        <Link to="/signup" className="link-text">
+          회원가입
+        </Link>
       </p>
     </section>
   );
