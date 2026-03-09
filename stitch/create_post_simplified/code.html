@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#548687",
+                        "background-light": "#f6f7f7",
+                        "background-dark": "#171b1b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display text-slate-900 dark:text-slate-100 min-h-screen bg-white dark:bg-slate-950">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header / Navigation -->
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 dark:bg-background-dark px-6 py-4 md:px-20 lg:px-40 bg-slate-50">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Create Post</h2>
+</div>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<main class="flex flex-1 justify-center py-8 px-6 md:px-20 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-3xl w-full gap-8">
+<!-- Form Section -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 md:p-8 shadow-sm">
+<div class="flex flex-col gap-6">
+<!-- Title Input -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="post-title">
+                                    Post Title
+                                </label>
+<input class="form-input block w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-14 px-4 text-lg font-medium placeholder:text-slate-400 dark:placeholder:text-slate-500" id="post-title" placeholder="Give your story a catchy title..." type="text"/>
+</div>
+<!-- Content Textarea -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="post-content">
+                                    Story Content
+                                </label>
+<div class="relative group">
+<textarea class="form-input block w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary min-h-[400px] p-4 text-base leading-relaxed placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none" id="post-content" placeholder="Start writing your thoughts here..."></textarea>
+<!-- Formatting Tools Placeholder -->
+<div class="absolute bottom-4 right-4 flex gap-2">
+<button class="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">format_bold</span>
+</button>
+<button class="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">format_italic</span>
+</button>
+<button class="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">link</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-base">cloud_done</span>
+<span>Draft autosaved at 10:42 AM</span>
+</div>
+<div class="flex gap-3">
+<button class="flex min-w-[100px] items-center justify-center rounded-lg h-12 px-6 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-base font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                                Cancel
+                            </button>
+<button class="flex min-w-[120px] items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-bold hover:opacity-90 shadow-md shadow-primary/20 transition-all" style="background-color: #548687;">
+                                Publish Post
+                            </button>
+</div>
+</div>
+<!-- Optional Settings -->
+<div class="mt-4 border-t border-slate-200 dark:border-slate-800 pt-8">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Settings</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-center justify-between p-4 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">public</span>
+<span class="text-sm font-medium">Public Visibility</span>
+</div>
+<div class="w-10 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 bg-white size-4 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">comment</span>
+<span class="text-sm font-medium">Allow Comments</span>
+</div>
+<div class="w-10 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 bg-white size-4 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Meta -->
+</div>
+</div>
+</body></html>
